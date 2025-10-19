@@ -1,0 +1,132 @@
+spring:
+  application:
+    name: MediaConduit-API
+  output:
+    ansi:
+      enabled: ALWAYS
+  profiles:
+    active: dev
+
+  datasource:
+    url: 'jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL'
+    username: sa
+    password: ''
+    driver-class-name: org.h2.Driver # driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+server:
+  port: 8080
+
+
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: ${GOOGLE_CLIENT_ID}
+#            client-secret: ${GOOGLE_CLIENT_SECRET}
+#
+#  # Configurações de cache
+#  cache:
+#    type: caffeine
+#    caffeine:
+#      spec: maximumSize=500,expireAfterAccess=600s
+#
+#  mvc:
+#    throw-exception-if-no-handler-found: true
+#  web:
+#    resources:
+#      add-mappings: false
+#
+#springdoc:
+#  override-with-generic-response: false
+#
+#logging:
+#  level:
+#    root: WARN # TRACE > DEBUG > INFO > WARN > ERROR
+#    org:
+#      springframework:
+#        web: DEBUG
+#    io.github.mgluizbrito: TRACE
+#  file:
+#    name: logs/app.log
+#  pattern:
+#    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} [%thread] %-5level %logger{36} : %msg%n"
+#
+#management:
+#  server:
+#    port: 9090
+#  endpoints:
+#    web:
+#      exposure:
+#        include: health, beans, logfile, metrics
+#
+#  # Configurações de segurança básica
+#  #  security:
+#  #    user:
+#  #      name: admin
+#  #      password: admin
+#  #      roles: ADMIN
+#
+#  # Configurações de internacionalização
+##  messages:
+##    basename: i18n/messages
+##    encoding: UTF-8
+
+##
+### Configurações do Actuator
+##management:
+##  endpoints:
+##    web:
+##      exposure:
+##        include: health, info, metrics, prometheus
+##  endpoint:
+##    health:
+##      show-details: always
+##    metrics:
+##      enabled: true
+##
+### Configurações personalizadas (custom properties)
+##app:
+##  config:
+##    max-registros: 100
+##    tempo-expiracao: 3600
+##    recursos:
+##      - recurso1
+##      - recurso2
+##    notificacoes:
+##      email: suporte@empresa.com
+##      sms: +5511999999999
+##
+### Exemplo de integração com serviços externos
+##integracao:
+##  api-externa:
+##    url: https://api.externa.com/v1
+##    timeout: 5000
+##    autenticacao:
+##      tipo: Bearer
+##      token: meuToken123
+#
+## PRODUCTION
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: production
+#  jpa:
+#    show-sql: false
