@@ -6,5 +6,5 @@ public record ExtractResponseDTO(
         String jobId,
         String status,
         URL trackingURL
-    ) {
+) {
 }

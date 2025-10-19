@@ -11,5 +11,5 @@ public record ExtractRequestDTO(
         FileFormats format,
         String notificationEmail,
         ExtractConfigDTO config
-        ) {
+) {
 }

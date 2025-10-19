@@ -19,7 +19,7 @@ import java.net.URISyntaxException;
 public class YoutubeController {
 
     @PostMapping
-    public ResponseEntity<ExtractResponseDTO> startExtract (@RequestBody @Valid ExtractRequestDTO dto, UriComponentsBuilder ucb) throws URISyntaxException, MalformedURLException {
+    public ResponseEntity<ExtractResponseDTO> startExtract(@RequestBody @Valid ExtractRequestDTO dto, UriComponentsBuilder ucb) throws URISyntaxException, MalformedURLException {
         return ResponseEntity.ok(new ExtractResponseDTO("aa", "bb", new URI("https://www.google.com").toURL()));
     }
 }

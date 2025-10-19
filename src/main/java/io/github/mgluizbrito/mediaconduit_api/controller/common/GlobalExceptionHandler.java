@@ -11,7 +11,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.nio.file.AccessDeniedException;
 import java.util.List;
@@ -44,7 +43,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidFieldException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ExceptionResponse handlerInvalidFieldException(InvalidFieldException e){
+    public ExceptionResponse handlerInvalidFieldException(InvalidFieldException e) {
         return new ExceptionResponse(
                 HttpStatus.UNPROCESSABLE_ENTITY.value(), "Invalid Field", List.of(new ExceptionsField(e.getField(), e.getMessage()))
         );
@@ -52,7 +51,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ExceptionResponse handlerDeniedAccessException(AccessDeniedException e){
+    public ExceptionResponse handlerDeniedAccessException(AccessDeniedException e) {
         return new ExceptionResponse(HttpStatus.UNAUTHORIZED.value(), "ACCESS DENIED", List.of());
     }
 }

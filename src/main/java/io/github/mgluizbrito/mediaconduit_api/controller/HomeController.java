@@ -7,17 +7,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+enum ExtractorsAvailableList {
+    YOUTUBE,
+}
+
 @RestController
 @RequestMapping("/")
 public class HomeController {
 
     @GetMapping("extract")
-    public Map<String, List<ExtractorsAvailableList>> listExtractors(){
+    public Map<String, List<ExtractorsAvailableList>> listExtractors() {
 
         return Map.of("Available Services:", Arrays.asList(ExtractorsAvailableList.values()));
     }
-}
-
-enum ExtractorsAvailableList{
-    YOUTUBE,
 }
