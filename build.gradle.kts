@@ -6,7 +6,7 @@ plugins {
 
 group = "io.github.mgluizbrito"
 version = "0.0.1-SNAPSHOT"
-description = "Projeto de dese "
+description = "A YT-DLP wrapper to download media and get metadata via RestFull API"
 
 java {
     toolchain {
