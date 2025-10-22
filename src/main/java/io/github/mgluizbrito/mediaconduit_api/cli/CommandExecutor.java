@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -62,9 +64,13 @@ public class CommandExecutor {
                 
                 if (exitCode == 0) {
                     downloadService.updateTaskStatus(task.getJobId(), JobStatus.COMPLETED);
+
                     if (finalFilePath != null) {
-                        downloadService.updateTaskFileUrl(task.getJobId(), finalFilePath);
+                        Path path = Paths.get(finalFilePath);
+                        String fileName = path.getFileName().toString();
+                        downloadService.updateTaskFileUrl(task.getJobId(), "/downloaded-media/" + fileName);
                     }
+
                     log.info("Download concluído com sucesso para jobId: {}", task.getJobId());
                 } else {
                     downloadService.updateTaskError(task.getJobId(), "yt-dlp falhou com código de saída: " + exitCode);
