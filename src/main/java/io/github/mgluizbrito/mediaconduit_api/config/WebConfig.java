@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    private static final String DOWNLOAD_DIR = "media/downloaded";
+    private static final String DOWNLOAD_DIR = "./media/downloaded";
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

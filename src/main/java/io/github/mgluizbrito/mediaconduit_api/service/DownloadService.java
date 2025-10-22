@@ -2,6 +2,7 @@ package io.github.mgluizbrito.mediaconduit_api.service;
 
 import io.github.mgluizbrito.mediaconduit_api.cli.CommandExecutor;
 import io.github.mgluizbrito.mediaconduit_api.controller.dto.ExtractRequestDTO;
+import io.github.mgluizbrito.mediaconduit_api.exceptions.MediaExtractionException;
 import io.github.mgluizbrito.mediaconduit_api.model.ExtractionTask;
 import io.github.mgluizbrito.mediaconduit_api.model.ExtractorsAvailable;
 import io.github.mgluizbrito.mediaconduit_api.model.JobStatus;
@@ -46,7 +47,7 @@ public class DownloadService {
 
     public ExtractionTask getTaskStatus(UUID jobId) {
         return taskRepository.findByJobId(jobId)
-                .orElseThrow(() -> new RuntimeException("Task não encontrada com jobId: " + jobId));
+                .orElseThrow(() -> new MediaExtractionException("Task não encontrada com jobId: " + jobId, "VERIFIQUE O JobId"));
     }
 
     public void updateTaskProgress(UUID jobId, int progress) {
