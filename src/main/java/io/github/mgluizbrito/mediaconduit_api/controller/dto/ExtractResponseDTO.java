@@ -1,10 +1,10 @@
 package io.github.mgluizbrito.mediaconduit_api.controller.dto;
 
-import java.net.URL;
+import java.util.UUID;
 
 public record ExtractResponseDTO(
-        String jobId,
+        UUID jobId,
         String status,
-        URL trackingURL
+        String trackingURL
 ) {
 }

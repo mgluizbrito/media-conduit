@@ -3,6 +3,7 @@ package io.github.mgluizbrito.mediaconduit_api.controller.dto.ExtractConfigs;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.Range;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME, // Tipo de identificação: Nome da subclasse ou valor de propriedade
@@ -14,6 +15,14 @@ import jakarta.validation.constraints.Size;
         @JsonSubTypes.Type(value = YoutubeExtractConfigDTO.class, name = "YOUTUBE_CONFIG")
 })
 public abstract class ExtractConfigDTO {
-    @Size(min = 1, max = 5, message = "Quality ID must be between 1 and 5 characters long")
-    private String qualityId;
+    @Range(min = 1, max = 5, message = "Quality must be between 1 and 10, 1 being worst quality and 5 best quality" )
+    private int quality;
+    
+    public int getQuality() {
+        return quality;
+    }
+    
+    public void setQuality(int quality) {
+        this.quality = quality;
+    }
 }

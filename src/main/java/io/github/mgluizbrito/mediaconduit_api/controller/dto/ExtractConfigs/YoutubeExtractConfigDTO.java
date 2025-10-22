@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-class YoutubeExtractConfigDTO extends ExtractConfigDTO {
+public class YoutubeExtractConfigDTO extends ExtractConfigDTO {
     private boolean includeSubtitles;
     @Positive(message = "The playlist index must be positive")
     private int playlistIndex;
