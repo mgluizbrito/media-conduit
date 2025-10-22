@@ -22,10 +22,6 @@ public class CustomErrorController implements ErrorController {
         return new ExceptionResponse(HttpStatus.NOT_FOUND.value(), "The requested endpoint was not found. Please check the URL.", List.of());
     }
 
-    private static ExceptionResponse defaultExceptionResponse() {
-        return new ExceptionResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "An unexpected internal error occurred.", List.of());
-    }
-
     @RequestMapping
     public ExceptionResponse handleError(HttpServletRequest request) {
 
@@ -35,6 +31,6 @@ public class CustomErrorController implements ErrorController {
         if (httpStatus == HttpStatus.NOT_FOUND) return notFoundExceptionResponse();
         if (httpStatus == HttpStatus.METHOD_NOT_ALLOWED) return methodNotAllowedExceptionResponse();
 
-        return defaultExceptionResponse();
+        return ExceptionResponse.defaultResponse("An unexpected internal error occurred.");
     }
 }

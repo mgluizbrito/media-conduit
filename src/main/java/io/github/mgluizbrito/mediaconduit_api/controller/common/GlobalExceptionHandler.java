@@ -3,6 +3,7 @@ package io.github.mgluizbrito.mediaconduit_api.controller.common;
 import io.github.mgluizbrito.mediaconduit_api.controller.dto.ExceptionResponse;
 import io.github.mgluizbrito.mediaconduit_api.controller.dto.ExceptionsField;
 import io.github.mgluizbrito.mediaconduit_api.exceptions.InvalidFieldException;
+import io.github.mgluizbrito.mediaconduit_api.exceptions.MediaExtractionException;
 import io.github.mgluizbrito.mediaconduit_api.exceptions.RecordDuplicateException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -53,5 +54,13 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ExceptionResponse handlerDeniedAccessException(AccessDeniedException e) {
         return new ExceptionResponse(HttpStatus.UNAUTHORIZED.value(), "ACCESS DENIED", List.of());
+    }
+
+    @ExceptionHandler(MediaExtractionException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse handlerMediaExtractionException(MediaExtractionException e) {
+        return new ExceptionResponse(
+                HttpStatus.BAD_REQUEST.value(), e.getMessage(), List.of()
+        );
     }
 }
