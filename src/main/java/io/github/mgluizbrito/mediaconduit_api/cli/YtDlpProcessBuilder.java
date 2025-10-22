@@ -8,8 +8,8 @@ import io.github.mgluizbrito.mediaconduit_api.exceptions.MediaExtractionExceptio
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -62,15 +62,14 @@ public class YtDlpProcessBuilder {
         }
     }
 
-    public static List<String> buildYtdlpDownloadCommand(ExtractRequestDTO request) {
+    public static List<String> buildYtdlpDownloadCommand(UUID jobId, ExtractRequestDTO request) {
         List<String> command = new ArrayList<>();
         command.add("yt-dlp");
         
         // URL do vídeo
         command.add(request.mediaIdentifier());
-        
-        // Template de saída - arquivos salvos em ./media/downloaded/
-        String outputTemplate = "./media/downloaded/%(title)s.%(ext)s";
+
+        String outputTemplate = String.format("./media/downloaded/%s.%s", jobId, request.format());
         command.add("-o");
         command.add(outputTemplate);
         
@@ -99,9 +98,7 @@ public class YtDlpProcessBuilder {
     }
     
     private static String buildFormatSelector(String format, ExtractConfigDTO config) {
-        if (config == null) {
-            return String.format("bestvideo[ext=%s]+bestaudio/best", format);
-        }
+        if (config == null) return String.format("bestvideo[ext=%s]+bestaudio/best", format);
         
         // Mapear qualidade (1-5) para resoluções do yt-dlp
         int quality = config.getQuality();

@@ -68,7 +68,7 @@ public class ExtractController {
     }
 
     @GetMapping("/status/{jobId}")
-    public ResponseEntity<TaskStatusDTO> getTaskStatus(@PathVariable UUID jobId) {
+    public ResponseEntity<TaskStatusDTO> getTaskStatus(@PathVariable UUID jobId, UriComponentsBuilder ucb) {
         ExtractionTask task = downloadService.getTaskStatus(jobId);
         
         TaskStatusDTO statusDTO = new TaskStatusDTO(
@@ -78,7 +78,7 @@ public class ExtractController {
                 task.getProgress(),
                 task.getStartTime(),
                 task.getFinishTime(),
-                task.getFileUrl(),
+                ucb.path("/{taskFileUrl}").buildAndExpand(task.getFileUrl()).toUriString(),
                 task.getErrorMessage()
         );
         
