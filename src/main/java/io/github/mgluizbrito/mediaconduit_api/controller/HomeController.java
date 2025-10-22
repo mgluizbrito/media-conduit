@@ -1,5 +1,6 @@
 package io.github.mgluizbrito.mediaconduit_api.controller;
 
+import io.github.mgluizbrito.mediaconduit_api.model.ExtractorsAvailable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,17 +9,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-enum ExtractorsAvailableList {
-    YOUTUBE,
-}
-
 @RestController
 @RequestMapping("/")
 public class HomeController {
 
     @GetMapping("extract")
-    public Map<String, List<ExtractorsAvailableList>> listExtractors() {
+    public Map<String, List<ExtractorsAvailable>> listExtractors() {
 
-        return Map.of("Available Services:", Arrays.asList(ExtractorsAvailableList.values()));
+        return Map.of("Available Services:", Arrays.asList(ExtractorsAvailable.values()));
     }
 }
